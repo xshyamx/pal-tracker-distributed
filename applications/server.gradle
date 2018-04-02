@@ -11,3 +11,17 @@ dependencies {
 
     testCompile project(":components:test-support")
 }
+
+apply plugin: "io.spring.dependency-management"
+
+dependencyManagement {
+    imports {
+        mavenBom "io.pivotal.spring.cloud:spring-cloud-services-dependencies:$springCloudServicesVersion"
+    }
+}
+
+dependencies {
+    compile "org.springframework.boot:spring-boot-starter-actuator"
+    compile "io.pivotal.spring.cloud:spring-cloud-services-starter-service-registry"
+
+}
