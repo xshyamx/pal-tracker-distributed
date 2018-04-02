@@ -77,6 +77,7 @@ public class FlowTest {
         HttpClient.Response response;
 
         response = httpClient.get(registrationServerUrl("/"));
+        System.out.println("FLOWTEST" + response.body);
         assertThat(response.body).isEqualTo("Noop!");
 
         response = httpClient.post(registrationServerUrl("/registration"), jsonMapBuilder()
