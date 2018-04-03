@@ -87,7 +87,7 @@ jobs:
 - name: deploy-allocations
   plan:
   - get: pal-tracker
-    passed: [build]
+    passed: [build, deploy-registration]
     trigger: true
   - get: allocations-artifacts
     trigger: false
@@ -100,7 +100,7 @@ jobs:
 - name: deploy-backlog
   plan:
   - get: pal-tracker
-    passed: [build]
+    passed: [build, deploy-registration]
     trigger: true
   - get: backlog-artifacts
     trigger: false
@@ -126,7 +126,7 @@ jobs:
 - name: deploy-timesheets
   plan:
   - get: pal-tracker
-    passed: [build]
+    passed: [build, deploy-registration]
     trigger: true
   - get: timesheets-artifacts
     trigger: false
