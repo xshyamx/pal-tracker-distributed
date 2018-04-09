@@ -1,0 +1,37 @@
+---
+defaults: &defaults
+  buildpack: java_buildpack_offline
+  memory: 1G
+  instances: 1
+
+applications:
+- name: tracker-registration
+  path: ./applications/registration-server/build/libs/registration-server.jar
+  host: registration-pal-shyam
+  <<: *defaults
+  services:
+  - tracker-registration-database
+- name: tracker-backlog
+  path: ./applications/backlog-server/build/libs/backlog-server.jar
+  host: backlog-pal-shyam
+  <<: *defaults
+  env:
+    REGISTRATION_SERVER_ENDPOINT: http://registration-pal-shyam.apps.longs.pal.pivotal.io
+  services:
+  - tracker-backlog-database
+- name: tracker-timesheets
+  path: ./applications/timesheets-server/build/libs/timesheets-server.jar
+  host: timesheets-pal-shyam
+  <<: *defaults
+  env:
+    REGISTRATION_SERVER_ENDPOINT: http://registration-pal-shyam.apps.longs.pal.pivotal.io
+  services:
+  - tracker-timesheets-database
+- name: tracker-allocations
+  path: ./applications/allocations-server/build/libs/allocations-server.jar
+  host: allocations-pal-shyam
+  <<: *defaults
+  env:
+    REGISTRATION_SERVER_ENDPOINT: http://registration-pal-shyam.apps.longs.pal.pivotal.io
+  services:
+  - tracker-allocations-database
